@@ -151,7 +151,7 @@ if page == "🏠 Home":
 
     show_home()
 
-elif page == "🎯 Prediction":
+elif page == "🎯 Pred":
 
     show_prediction_page()
 
