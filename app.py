@@ -70,9 +70,7 @@ if not st.session_state.logged_in:
     🎓 Student Performance Prediction
     </h1>
 
-    <p class="sub-title">
-    Machine Learning Based Student Analytics Platform
-    </p>
+    
 
     </div>
     """, unsafe_allow_html=True)
