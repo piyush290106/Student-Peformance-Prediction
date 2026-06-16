@@ -1,0 +1,56 @@
+.stApp {
+    background: linear-gradient(
+        135deg,
+        #f17d68,
+        #91523f
+    );
+}
+
+.auth-card{
+    background:rgba(253, 237, 227, 0.916);
+    border-radius:25px;
+    padding:40px;
+    box-shadow:0px 15px 40px rgba(0,0,0,0.25);
+}
+
+.main-title{
+    text-align:center;
+    font-size:55px;         
+    font-weight:800;
+    color:#0f172a;
+}
+
+.sub-title{
+    text-align:center;
+    color:#64748b;
+    font-size:20px;
+}
+
+section[data-testid="stSidebar"]{
+    background:#111827;
+}
+
+section[data-testid="stSidebar"] *{
+    color:white;
+}
+
+.stButton button{
+    background:linear-gradient(
+        90deg,
+        #e98158,
+        #dd8955
+    );
+    color:white;
+    border:none;
+    border-radius:12px;
+    height:50px;
+    font-size:18px;
+    font-weight:600;
+}
+
+[data-testid="metric-container"]{
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0px 5px 15px rgba(0,0,0,0.1);
+}

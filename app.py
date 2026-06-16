@@ -20,6 +20,18 @@ st.set_page_config(
     page_icon="🎓",
     layout="wide"
 )
+def load_css():
+
+    with open(
+        "src/styles/style.css"
+    ) as f:
+
+        st.markdown(
+            f"<style>{f.read()}</style>",
+            unsafe_allow_html=True
+        )
+
+load_css()
 
 # ==================================================
 # DATABASE SETUP
@@ -41,81 +53,112 @@ if "username" not in st.session_state:
 # LOGIN / REGISTER PAGE
 # ==================================================
 
+# ==================================================
+# LOGIN / REGISTER PAGE
+# ==================================================
+
+# ==================================================
+# LOGIN / REGISTER PAGE
+# ==================================================
+
 if not st.session_state.logged_in:
 
-    st.title("🎓 Student Performance Prediction System")
+    st.markdown("""
+    <div class="auth-card">
 
-    st.markdown(
-        "### Login or Create an Account"
-    )
+    <h1 class="main-title">
+    🎓 Student Performance Prediction
+    </h1>
 
-    auth_option = st.radio(
-        "Choose Option",
-        ["Login", "Register"]
-    )
+    <p class="sub-title">
+    Machine Learning Based Student Analytics Platform
+    </p>
 
-    username = st.text_input(
-        "Username"
-    )
+    </div>
+    """, unsafe_allow_html=True)
 
-    password = st.text_input(
-        "Password",
-        type="password"
-    )
+    col1, col2, col3 = st.columns([1,2,1])
 
-    # ---------------- REGISTER ----------------
+    with col2:
 
-    if auth_option == "Register":
+        st.markdown("## 🔐 Account Access")
 
-        if st.button("Create Account"):
+        auth_option = st.radio(
+            "Select Option",
+            ["Login", "Register"]
+        )
 
-            if username.strip() == "" or password.strip() == "":
-                st.error("Please fill all fields")
+        username = st.text_input(
+            "👤 Username"
+        )
 
-            else:
+        password = st.text_input(
+            "🔑 Password",
+            type="password"
+        )
 
-                success = register_user(
+        # ---------------- REGISTER ----------------
+
+        if auth_option == "Register":
+
+            if st.button(
+                "✨ Create Account",
+                use_container_width=True
+            ):
+
+                if username.strip() == "" or password.strip() == "":
+
+                    st.warning(
+                        "Please fill all fields"
+                    )
+
+                else:
+
+                    success = register_user(
+                        username,
+                        password
+                    )
+
+                    if success:
+
+                        st.success(
+                            "✅ Account created successfully. Please login."
+                        )
+
+                    else:
+
+                        st.error(
+                            "❌ Username already exists."
+                        )
+
+        # ---------------- LOGIN ----------------
+
+        else:
+
+            if st.button(
+                "🚀 Login",
+                use_container_width=True
+            ):
+
+                user = login_user(
                     username,
                     password
                 )
 
-                if success:
-                    st.success(
-                        "Account created successfully. Please login."
-                    )
+                if user:
+
+                    st.session_state.logged_in = True
+                    st.session_state.username = username
+
+                    st.rerun()
 
                 else:
+
                     st.error(
-                        "Username already exists."
+                        "❌ Invalid username or password."
                     )
 
-    # ---------------- LOGIN ----------------
-
-    else:
-
-        if st.button("Login"):
-
-            user = login_user(
-                username,
-                password
-            )
-
-            if user:
-
-                st.session_state.logged_in = True
-                st.session_state.username = username
-
-                st.rerun()
-
-            else:
-
-                st.error(
-                    "Invalid username or password."
-                )
-
-    st.stop()
-
-# ==================================================
+    st.stop()# ==================================================
 # SIDEBAR
 # ==================================================
 
