@@ -52,21 +52,29 @@ def show_home():
     # ==========================
 
     st.markdown("""
-    <div class="hero">
+<div style="
+    background: linear-gradient(135deg,#14b8a6,#0ea5e9);
+    padding:50px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,0.15);
+">
 
-    <h1>🎓 Student Performance Prediction System</h1>
+<h1 style="
+    color:white;
+    font-size:60px;
+    font-weight:800;
+    margin-bottom:10px;
+">
+🎓 Student Performance Prediction System
+</h1>
 
-    <h4>
-    Machine Learning Based Academic Analytics Platform
-    </h4>
 
-    <p>
-    Predict student performance using AI,
-    visualize analytics and generate reports.
-    </p>
-
-    </div>
-    """, unsafe_allow_html=True)
+</div>
+        
+""", unsafe_allow_html=True)
+    
+    
 
     # ==========================
     # KPI CARDS
@@ -98,78 +106,24 @@ def show_home():
 
     st.markdown("---")
 
-    # ==========================
-    # FEATURES
-    # ==========================
-
-    st.subheader("🚀 Platform Features")
-
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-
-        st.markdown("""
-        <div class="feature-card">
-        <h3>🎯 Prediction</h3>
-        <p>
-        Predict student academic performance
-        using Machine Learning.
-        </p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with col2:
-
-        st.markdown("""
-        <div class="feature-card">
-        <h3>📊 Analytics</h3>
-        <p>
-        Interactive dashboard with charts,
-        insights and visualizations.
-        </p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with col3:
-
-        st.markdown("""
-        <div class="feature-card">
-        <h3>📄 Reports</h3>
-        <p>
-        Generate downloadable PDF reports
-        for predictions.
-        </p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.markdown("---")
-
-    # ==========================
-    # PROJECT INFO
-    # ==========================
-
-    st.success(
-        "✅ Student Performance Prediction System is running successfully."
-    )
-
-    st.info(
-        "Use the sidebar to access Prediction, Dashboard, History, and Model Comparison modules."
-    )
-
-    # ==========================
-    # FOOTER
-    # ==========================
-
     st.markdown("""
-    <hr>
+<hr>
 
-    <center>
+<div style="
+    text-align:center;
+    color:#64748b;
+    font-size:100000px;
+">
 
-    <b>Student Performance Prediction System</b>
+🎓 Student Performance Prediction System<br>
 
-    <br>
+Developed by <b>Piyush Jain and Payal Panwar</b><br>
 
-    Python • Streamlit • Scikit-Learn • SQLite • Plotly
 
-    </center>
-    """, unsafe_allow_html=True)
+</div>
+""", unsafe_allow_html=True)
+
+    
+   
+
+   

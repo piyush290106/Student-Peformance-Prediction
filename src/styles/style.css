@@ -1,56 +1,116 @@
-.stApp {
+/* Main Background */
+.stApp{
     background: linear-gradient(
         135deg,
-        #064076,
-        #ae06c7
+        #f8fffe,
+        #e0f7fa,
+        #e8f5e9
     );
 }
 
+/* Hero Card */
 .auth-card{
-    background:rgba(253, 237, 227, 0.916);
+    background:white;
     border-radius:25px;
     padding:40px;
-    box-shadow:0px 15px 40px rgba(0,0,0,0.25);
+    box-shadow:0px 15px 35px rgba(0,0,0,0.08);
+    border:1px solid #dbeafe;
 }
 
+/* Main Title */
 .main-title{
     text-align:center;
-    font-size:55px;         
+    font-size:58px;
     font-weight:800;
     color:#0f172a;
 }
 
+/* Subtitle */
 .sub-title{
     text-align:center;
-    color:#64748b;
+    color:#475569;
     font-size:20px;
 }
 
+/* Sidebar */
 section[data-testid="stSidebar"]{
-    background:#111827;
+    background:linear-gradient(
+        180deg,
+        #14b8a6,
+        #0284c7
+    );
 }
 
 section[data-testid="stSidebar"] *{
     color:white;
 }
 
+/* Sidebar Cards */
+.sidebar-user{
+    background:rgba(255,255,255,0.15);
+    padding:15px;
+    border-radius:12px;
+}
+
+/* Buttons */
 .stButton button{
     background:linear-gradient(
         90deg,
-        #e98158,
-        #dd8955
+        #14b8a6,
+        #0ea5e9
     );
+
     color:white;
     border:none;
     border-radius:12px;
     height:50px;
     font-size:18px;
     font-weight:600;
+
+    transition:0.3s;
 }
 
+.stButton button:hover{
+    transform:translateY(-2px);
+    box-shadow:0px 8px 20px rgba(14,165,233,0.3);
+}
+
+/* Metric Cards */
 [data-testid="metric-container"]{
     background:white;
-    border-radius:20px;
+    border-radius:18px;
     padding:20px;
-    box-shadow:0px 5px 15px rgba(0,0,0,0.1);
+
+    border-left:5px solid #14b8a6;
+
+    box-shadow:
+        0px 5px 15px rgba(0,0,0,0.08);
+}
+
+/* Charts */
+.stPlotlyChart{
+    background:white;
+    padding:20px;
+    border-radius:18px;
+    box-shadow:0px 5px 15px rgba(0,0,0,0.08);
+}
+
+/* DataFrames */
+[data-testid="stDataFrame"]{
+    background:white;
+    border-radius:18px;
+    padding:10px;
+}
+
+/* Success Box */
+.stSuccess{
+    border-radius:12px;
+}
+
+/* Prediction Result Card */
+.result-card{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0px 8px 20px rgba(0,0,0,0.08);
 }

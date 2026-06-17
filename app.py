@@ -76,14 +76,20 @@ if not st.session_state.logged_in:
     if st.session_state.auth_page == "Login":
 
         st.markdown("""
-        <div class="auth-card">
-            <h1 class="main-title">
-                🎓 Student Performance Prediction
-            </h1>
+<div class="auth-card">
 
-            
-        </div>
-        """, unsafe_allow_html=True)
+<h1 class="main-title">
+🎓 Student Performance Prediction System
+</h1>
+
+
+
+<hr style="border:1px solid #e2e8f0;">
+
+
+
+</div>
+""", unsafe_allow_html=True)
 
         col1, col2, col3 = st.columns([1,2,1])
 
@@ -144,9 +150,7 @@ if not st.session_state.logged_in:
                 🎓 Student Performance Prediction
             </h1>
 
-            <p class="sub-title">
-                Create Your Account
-            </p>
+            
         </div>
         """, unsafe_allow_html=True)
 
