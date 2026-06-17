@@ -1,5 +1,13 @@
 .stApp {
+<<<<<<< HEAD
     background: linear-gradient(135deg, #b00bdd, #884bd7);
+=======
+    background: linear-gradient(
+        135deg,
+        #064076,
+        #ae06c7
+    );
+>>>>>>> e7d31a7371395a12437fbdbcff23210fe7d2c14d
 }
 
 .auth-card{

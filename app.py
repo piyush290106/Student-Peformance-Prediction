@@ -4,44 +4,52 @@ from src.ui.home import show_home
 from src.ui.prediction_page import show_prediction_page
 from src.ui.dashboard_page import show_dashboard_page
 from src.ui.model_comparison_page import show_model_comparison
+from src.ui.history_page import show_history_page
 
 from src.auth.database import create_users_table
 from src.auth.register import register_user
 from src.auth.login import login_user
-from src.ui.history_page import show_history_page
 
 
-# ==================================================
+# ==========================================
 # PAGE CONFIG
-# ==================================================
+# ==========================================
 
 st.set_page_config(
     page_title="Student Performance Prediction System",
     page_icon="🎓",
     layout="wide"
 )
+
+
+# ==========================================
+# LOAD CSS
+# ==========================================
+
 def load_css():
+    try:
+        with open("src/styles/style.css") as f:
+            st.markdown(
+                f"<style>{f.read()}</style>",
+                unsafe_allow_html=True
+            )
+    except:
+        pass
 
-    with open(
-        "src/styles/style.css"
-    ) as f:
-
-        st.markdown(
-            f"<style>{f.read()}</style>",
-            unsafe_allow_html=True
-        )
 
 load_css()
 
-# ==================================================
-# DATABASE SETUP
-# ==================================================
+
+# ==========================================
+# DATABASE
+# ==========================================
 
 create_users_table()
 
-# ==================================================
+
+# ==========================================
 # SESSION STATE
-# ==================================================
+# ==========================================
 
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
@@ -49,55 +57,113 @@ if "logged_in" not in st.session_state:
 if "username" not in st.session_state:
     st.session_state.username = ""
 
-# ==================================================
+if "auth_page" not in st.session_state:
+    st.session_state.auth_page = "Login"
+
+
+# ==========================================
 # LOGIN / REGISTER PAGE
-# ==================================================
+# ==========================================
 
 # ==================================================
-# LOGIN / REGISTER PAGE
-# ==================================================
-
-# ==================================================
-# LOGIN / REGISTER PAGE
+# AUTHENTICATION PAGES
 # ==================================================
 
 if not st.session_state.logged_in:
 
-    st.markdown("""
-    <div class="auth-card">
+    # ---------------- LOGIN PAGE ----------------
 
-    <h1 class="main-title">
-    🎓 Student Performance Prediction
-    </h1>
+    if st.session_state.auth_page == "Login":
 
-    
+        st.markdown("""
+        <div class="auth-card">
+            <h1 class="main-title">
+                🎓 Student Performance Prediction
+            </h1>
 
-    </div>
-    """, unsafe_allow_html=True)
+            
+        </div>
+        """, unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns([1,2,1])
+        col1, col2, col3 = st.columns([1,2,1])
 
-    with col2:
+        with col2:
 
-        st.markdown("## 🔐 Account Access")
+            st.subheader("🔐 Login")
 
-        auth_option = st.radio(
-            "Select Option",
-            ["Login", "Register"]
-        )
+            username = st.text_input(
+                "👤 Username"
+            )
 
-        username = st.text_input(
-            "👤 Username"
-        )
+            password = st.text_input(
+                "🔑 Password",
+                type="password"
+            )
 
-        password = st.text_input(
-            "🔑 Password",
-            type="password"
-        )
+            if st.button(
+                "🚀 Login",
+                use_container_width=True
+            ):
 
-        # ---------------- REGISTER ----------------
+                user = login_user(
+                    username,
+                    password
+                )
 
-        if auth_option == "Register":
+                if user:
+
+                    st.session_state.logged_in = True
+                    st.session_state.username = username
+
+                    st.rerun()
+
+                else:
+
+                    st.error(
+                        "Invalid username or password"
+                    )
+
+            st.markdown("---")
+
+            if st.button(
+                "📝 Create New Account",
+                use_container_width=True
+            ):
+
+                st.session_state.auth_page = "Register"
+
+                st.rerun()
+
+    # ---------------- REGISTER PAGE ----------------
+
+    elif st.session_state.auth_page == "Register":
+
+        st.markdown("""
+        <div class="auth-card">
+            <h1 class="main-title">
+                🎓 Student Performance Prediction
+            </h1>
+
+            <p class="sub-title">
+                Create Your Account
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        col1, col2, col3 = st.columns([1,2,1])
+
+        with col2:
+
+            st.subheader("📝 Register")
+
+            username = st.text_input(
+                "👤 Choose Username"
+            )
+
+            password = st.text_input(
+                "🔑 Choose Password",
+                type="password"
+            )
 
             if st.button(
                 "✨ Create Account",
@@ -120,45 +186,35 @@ if not st.session_state.logged_in:
                     if success:
 
                         st.success(
-                            "✅ Account created successfully. Please login."
+                            "Account created successfully."
                         )
+
+                        # Automatically go to login page
+                        st.session_state.auth_page = "Login"
+
+                        st.rerun()
 
                     else:
 
                         st.error(
-                            "❌ Username already exists."
+                            "Username already exists"
                         )
 
-        # ---------------- LOGIN ----------------
-
-        else:
+            st.markdown("---")
 
             if st.button(
-                "🚀 Login",
+                "⬅ Back To Login",
                 use_container_width=True
             ):
 
-                user = login_user(
-                    username,
-                    password
-                )
+                st.session_state.auth_page = "Login"
 
-                if user:
+                st.rerun()
 
-                    st.session_state.logged_in = True
-                    st.session_state.username = username
-
-                    st.rerun()
-
-                else:
-
-                    st.error(
-                        "❌ Invalid username or password."
-                    )
-
-    st.stop()# ==================================================
+    st.stop()
+# ==========================================
 # SIDEBAR
-# ==================================================
+# ==========================================
 
 st.sidebar.success(
     f"👤 Logged in as: {st.session_state.username}"
@@ -184,17 +240,22 @@ page = st.sidebar.radio(
     ]
 )
 
-# ==================================================
+
+# ==========================================
 # PAGE ROUTING
-# ==================================================
+# ==========================================
 
 if page == "🏠 Home":
 
     show_home()
 
-elif page == "🎯 Pred":
+elif page == "🎯 Prediction":
 
     show_prediction_page()
+
+elif page == "📜 History":
+
+    show_history_page()
 
 elif page == "📊 Dashboard":
 
@@ -203,6 +264,3 @@ elif page == "📊 Dashboard":
 elif page == "🤖 Model Comparison":
 
     show_model_comparison()
-elif page == "📜 History":
-
-    show_history_page()
