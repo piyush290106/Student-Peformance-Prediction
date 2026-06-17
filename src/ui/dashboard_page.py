@@ -5,44 +5,63 @@ import plotly.express as px
 
 def show_dashboard_page():
 
+    # ==========================
+    # LOAD DATA
+    # ==========================
+
     df = pd.read_csv("data/students.csv")
+
+    # ==========================
+    # PAGE HEADER
+    # ==========================
 
     st.title("📊 Student Analytics Dashboard")
     st.markdown("Comprehensive analysis of student performance data")
 
-    # ==========================================
+    chart_layout = dict(
+        height=500,
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        font=dict(size=14)
+    )
+
+    # ==========================
     # KPI CARDS
-    # ==========================================
+    # ==========================
 
     st.subheader("📌 Key Performance Indicators")
 
     c1, c2, c3, c4 = st.columns(4)
 
-    c1.metric(
-        "Total Students",
-        len(df)
-    )
+    with c1:
+        st.metric(
+            "👥 Total Students",
+            len(df)
+        )
 
-    c2.metric(
-        "Avg Math",
-        round(df["math score"].mean(), 2)
-    )
+    with c2:
+        st.metric(
+            "📐 Avg Math",
+            round(df["math score"].mean(), 1)
+        )
 
-    c3.metric(
-        "Avg Reading",
-        round(df["reading score"].mean(), 2)
-    )
+    with c3:
+        st.metric(
+            "📖 Avg Reading",
+            round(df["reading score"].mean(), 1)
+        )
 
-    c4.metric(
-        "Avg Writing",
-        round(df["writing score"].mean(), 2)
-    )
+    with c4:
+        st.metric(
+            "✍️ Avg Writing",
+            round(df["writing score"].mean(), 1)
+        )
 
     st.markdown("---")
 
-    # ==========================================
+    # ==========================
     # SCORE DISTRIBUTION
-    # ==========================================
+    # ==========================
 
     st.subheader("📈 Score Distribution")
 
@@ -54,8 +73,11 @@ def show_dashboard_page():
             df,
             x="math score",
             nbins=20,
-            title="Math Score Distribution"
+            title="Math Score Distribution",
+            color_discrete_sequence=["#14b8a6"]
         )
+
+        fig_math.update_layout(**chart_layout)
 
         st.plotly_chart(
             fig_math,
@@ -68,8 +90,11 @@ def show_dashboard_page():
             df,
             x="reading score",
             nbins=20,
-            title="Reading Score Distribution"
+            title="Reading Score Distribution",
+            color_discrete_sequence=["#0ea5e9"]
         )
+
+        fig_reading.update_layout(**chart_layout)
 
         st.plotly_chart(
             fig_reading,
@@ -78,9 +103,9 @@ def show_dashboard_page():
 
     st.markdown("---")
 
-    # ==========================================
+    # ==========================
     # GENDER ANALYSIS
-    # ==========================================
+    # ==========================
 
     st.subheader("👨‍🎓 Gender Analysis")
 
@@ -91,8 +116,11 @@ def show_dashboard_page():
         fig_gender = px.pie(
             df,
             names="gender",
-            title="Gender Distribution"
+            title="Gender Distribution",
+            hole=0.45
         )
+
+        fig_gender.update_layout(**chart_layout)
 
         st.plotly_chart(
             fig_gender,
@@ -125,6 +153,8 @@ def show_dashboard_page():
             title="Average Scores by Gender"
         )
 
+        fig_gender_bar.update_layout(**chart_layout)
+
         st.plotly_chart(
             fig_gender_bar,
             use_container_width=True
@@ -132,9 +162,9 @@ def show_dashboard_page():
 
     st.markdown("---")
 
-    # ==========================================
+    # ==========================
     # READING VS WRITING
-    # ==========================================
+    # ==========================
 
     st.subheader("📚 Reading vs Writing Relationship")
 
@@ -143,8 +173,11 @@ def show_dashboard_page():
         x="reading score",
         y="writing score",
         color="gender",
+        size="math score",
         title="Reading vs Writing Scores"
     )
+
+    fig_scatter.update_layout(**chart_layout)
 
     st.plotly_chart(
         fig_scatter,
@@ -153,9 +186,9 @@ def show_dashboard_page():
 
     st.markdown("---")
 
-    # ==========================================
+    # ==========================
     # CORRELATION HEATMAP
-    # ==========================================
+    # ==========================
 
     st.subheader("🔥 Correlation Heatmap")
 
@@ -170,8 +203,11 @@ def show_dashboard_page():
     fig_heatmap = px.imshow(
         corr,
         text_auto=True,
-        title="Correlation Between Scores"
+        title="Correlation Between Scores",
+        color_continuous_scale="Blues"
     )
+
+    fig_heatmap.update_layout(**chart_layout)
 
     st.plotly_chart(
         fig_heatmap,
@@ -180,9 +216,9 @@ def show_dashboard_page():
 
     st.markdown("---")
 
-    # ==========================================
+    # ==========================
     # LUNCH ANALYSIS
-    # ==========================================
+    # ==========================
 
     st.subheader("🍽 Lunch Type Impact")
 
@@ -210,6 +246,8 @@ def show_dashboard_page():
         title="Performance by Lunch Type"
     )
 
+    fig_lunch.update_layout(**chart_layout)
+
     st.plotly_chart(
         fig_lunch,
         use_container_width=True
@@ -222,9 +260,9 @@ def show_dashboard_page():
 
     st.markdown("---")
 
-    # ==========================================
+    # ==========================
     # TEST PREPARATION ANALYSIS
-    # ==========================================
+    # ==========================
 
     st.subheader("📝 Test Preparation Analysis")
 
@@ -252,6 +290,8 @@ def show_dashboard_page():
         title="Impact of Test Preparation"
     )
 
+    fig_prep.update_layout(**chart_layout)
+
     st.plotly_chart(
         fig_prep,
         use_container_width=True
@@ -264,16 +304,16 @@ def show_dashboard_page():
 
     st.markdown("---")
 
-    # ==========================================
-    # TOP PERFORMERS
-    # ==========================================
+    # ==========================
+    # TOP STUDENTS
+    # ==========================
 
     st.subheader("🏆 Top 10 Students")
 
     df["Average Score"] = (
-        df["math score"]
-        + df["reading score"]
-        + df["writing score"]
+        df["math score"] +
+        df["reading score"] +
+        df["writing score"]
     ) / 3
 
     top_students = df.sort_values(
@@ -288,9 +328,9 @@ def show_dashboard_page():
 
     st.markdown("---")
 
-    # ==========================================
+    # ==========================
     # DATASET PREVIEW
-    # ==========================================
+    # ==========================
 
     st.subheader("📄 Dataset Preview")
 

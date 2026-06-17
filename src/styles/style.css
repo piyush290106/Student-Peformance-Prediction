@@ -1,28 +1,16 @@
-<<<<<<< HEAD
 /* Main Background */
 .stApp{
-=======
-.stApp {
-<<<<<<< HEAD
-    background: linear-gradient(135deg, #b00bdd, #884bd7);
-=======
->>>>>>> 10e204914c61ed8ccbd1c7d246d882410804dad7
     background: linear-gradient(
         135deg,
         #f8fffe,
         #e0f7fa,
         #e8f5e9
     );
->>>>>>> e7d31a7371395a12437fbdbcff23210fe7d2c14d
 }
 
 /* Hero Card */
 .auth-card{
-<<<<<<< HEAD
     background:white;
-=======
-    background:rgba(71, 115, 148, 0.916);
->>>>>>> 10e204914c61ed8ccbd1c7d246d882410804dad7
     border-radius:25px;
     padding:40px;
     box-shadow:0px 15px 35px rgba(0,0,0,0.08);
@@ -40,11 +28,7 @@
 /* Subtitle */
 .sub-title{
     text-align:center;
-<<<<<<< HEAD
     color:#475569;
-=======
-    color:#556d8e;
->>>>>>> 10e204914c61ed8ccbd1c7d246d882410804dad7
     font-size:20px;
 }
 
@@ -61,7 +45,7 @@ section[data-testid="stSidebar"] *{
     color:white;
 }
 
-/* Sidebar Cards */
+/* Sidebar User Box */
 .sidebar-user{
     background:rgba(255,255,255,0.15);
     padding:15px;
@@ -72,24 +56,15 @@ section[data-testid="stSidebar"] *{
 .stButton button{
     background:linear-gradient(
         90deg,
-<<<<<<< HEAD
         #14b8a6,
         #0ea5e9
     );
-
     color:white;
-=======
-        rgba(55, 14, 61, 0.916),
-        rgba(216, 93, 227, 0.916)
-    );
-    color:rgb(86, 58, 10);
->>>>>>> 10e204914c61ed8ccbd1c7d246d882410804dad7
     border:none;
     border-radius:12px;
     height:50px;
     font-size:18px;
     font-weight:600;
-
     transition:0.3s;
 }
 
@@ -103,19 +78,16 @@ section[data-testid="stSidebar"] *{
     background:white;
     border-radius:18px;
     padding:20px;
-
     border-left:5px solid #14b8a6;
-
-    box-shadow:
-        0px 5px 15px rgba(0,0,0,0.08);
+    box-shadow:0px 5px 15px rgba(0,0,0,0.08);
 }
 
 /* Charts */
 .stPlotlyChart{
     background:white;
-    padding:20px;
     border-radius:18px;
     box-shadow:0px 5px 15px rgba(0,0,0,0.08);
+    overflow:hidden;
 }
 
 /* DataFrames */
@@ -125,12 +97,12 @@ section[data-testid="stSidebar"] *{
     padding:10px;
 }
 
-/* Success Box */
+/* Success Messages */
 .stSuccess{
     border-radius:12px;
 }
 
-/* Prediction Result Card */
+/* Result Cards */
 .result-card{
     background:white;
     padding:25px;
