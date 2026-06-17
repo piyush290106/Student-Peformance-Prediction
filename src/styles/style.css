@@ -1,13 +1,9 @@
 .stApp {
-    background: linear-gradient(
-        135deg,
-        #f17d68,
-        #91523f
-    );
+    background: linear-gradient(135deg, #b00bdd, #884bd7);
 }
 
 .auth-card{
-    background:rgba(253, 237, 227, 0.916);
+    background:rgba(71, 115, 148, 0.916);
     border-radius:25px;
     padding:40px;
     box-shadow:0px 15px 40px rgba(0,0,0,0.25);
@@ -22,7 +18,7 @@
 
 .sub-title{
     text-align:center;
-    color:#64748b;
+    color:#556d8e;
     font-size:20px;
 }
 
@@ -37,10 +33,10 @@ section[data-testid="stSidebar"] *{
 .stButton button{
     background:linear-gradient(
         90deg,
-        #e98158,
-        #dd8955
+        rgba(55, 14, 61, 0.916),
+        rgba(216, 93, 227, 0.916)
     );
-    color:white;
+    color:rgb(86, 58, 10);
     border:none;
     border-radius:12px;
     height:50px;
