@@ -1,6 +1,5 @@
 import streamlit as st
 from src.predictor import predict_student
-from src.insights import generate_insights
 from src.database.history import save_prediction
 from src.reports.pdf_report import generate_pdf
 
@@ -195,16 +194,5 @@ def show_prediction_page():
                 mime="application/pdf"
             )
 
-        st.markdown("---")
-
-        st.subheader("💡 Performance Insights")
-
-        insights = generate_insights(
-            lunch,
-            prep,
-            result["Average"]
-        )
-
-        for item in insights:
-
-            st.info(item)
+       
+       
