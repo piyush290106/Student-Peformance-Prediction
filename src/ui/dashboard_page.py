@@ -187,36 +187,6 @@ def show_dashboard_page():
     st.markdown("---")
 
     # ==========================
-    # CORRELATION HEATMAP
-    # ==========================
-
-    st.subheader("🔥 Correlation Heatmap")
-
-    corr = df[
-        [
-            "math score",
-            "reading score",
-            "writing score"
-        ]
-    ].corr()
-
-    fig_heatmap = px.imshow(
-        corr,
-        text_auto=True,
-        title="Correlation Between Scores",
-        color_continuous_scale="Blues"
-    )
-
-    fig_heatmap.update_layout(**chart_layout)
-
-    st.plotly_chart(
-        fig_heatmap,
-        use_container_width=True
-    )
-
-    st.markdown("---")
-
-    # ==========================
     # LUNCH ANALYSIS
     # ==========================
 
@@ -327,14 +297,3 @@ def show_dashboard_page():
     )
 
     st.markdown("---")
-
-    # ==========================
-    # DATASET PREVIEW
-    # ==========================
-
-    st.subheader("📄 Dataset Preview")
-
-    st.dataframe(
-        df.head(20),
-        use_container_width=True
-    )
