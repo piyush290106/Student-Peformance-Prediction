@@ -74,6 +74,7 @@ def show_prediction_page():
                 "test preparation course": prep
             }
         )
+        st.write(result)
 
         # Save Prediction History
         save_prediction(
@@ -121,7 +122,7 @@ def show_prediction_page():
 
         with c5:
 
-            if result["Status"] == "Pass":
+            if result["Status"] == "PASS":
 
                 st.success("✅ PASS")
 
@@ -159,19 +160,7 @@ def show_prediction_page():
 
         st.markdown("---")
 
-        # Confidence Meter
-        st.subheader("🎯 Prediction Confidence")
-
-        confidence = 91
-
-        st.progress(confidence)
-
-        st.success(
-            f"Model Confidence: {confidence}%"
-        )
-
-        st.markdown("---")
-
+        
         # PDF Report
         filename = "student_report.pdf"
 
