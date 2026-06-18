@@ -1,14 +1,18 @@
 import streamlit as st
 
+# ALL IMPORTS HERE
 from src.ui.home import show_home
 from src.ui.prediction_page import show_prediction_page
 from src.ui.dashboard_page import show_dashboard_page
 from src.ui.model_comparison_page import show_model_comparison
 from src.ui.history_page import show_history_page
+from src.ui.admin_dashboard import show_admin_dashboard
 
 from src.auth.database import create_users_table
 from src.auth.register import register_user
 from src.auth.login import login_user
+
+
 
 
 # ==========================================
@@ -56,6 +60,8 @@ if "logged_in" not in st.session_state:
 
 if "username" not in st.session_state:
     st.session_state.username = ""
+if "role" not in st.session_state:
+    st.session_state.role = ""
 
 if "auth_page" not in st.session_state:
     st.session_state.auth_page = "Login"
@@ -119,7 +125,10 @@ if not st.session_state.logged_in:
                 if user:
 
                     st.session_state.logged_in = True
-                    st.session_state.username = username
+
+                    st.session_state.username = user[0]
+
+                    st.session_state.role = user[1]
 
                     st.rerun()
 
@@ -223,25 +232,38 @@ if not st.session_state.logged_in:
 st.sidebar.success(
     f"👤 Logged in as: {st.session_state.username}"
 )
+st.sidebar.info(
+    f"🔐 Role: {st.session_state.role.upper()}"
+)
 
 if st.sidebar.button("🚪 Logout"):
 
     st.session_state.logged_in = False
+
     st.session_state.username = ""
+
+    st.session_state.role = ""
 
     st.rerun()
 
 st.sidebar.title("🎓 Student Analytics")
 
+menu = [
+    "🏠 Home",
+    "🎯 Prediction",
+    "📜 History",
+    "📊 Dashboard",
+    "🤖 Model Comparison"
+]
+
+if st.session_state.role == "admin":
+    menu.append(
+        "👨‍💼 Admin Dashboard"
+    )
+
 page = st.sidebar.radio(
     "Navigation",
-    [
-        "🏠 Home",
-        "🎯 Prediction",
-        "📜 History",
-        "📊 Dashboard",
-        "🤖 Model Comparison"
-    ]
+    menu
 )
 
 
@@ -252,6 +274,9 @@ page = st.sidebar.radio(
 if page == "🏠 Home":
 
     show_home()
+elif page == "👨‍💼 Admin Dashboard":
+
+    show_admin_dashboard()
 
 elif page == "🎯 Prediction":
 

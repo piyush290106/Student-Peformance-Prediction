@@ -14,10 +14,14 @@ def register_user(username, password):
     try:
         cursor.execute(
             """
-            INSERT INTO users (username, password)
-            VALUES (?, ?)
+            INSERT INTO users(
+                username,
+                password,
+                role
+                )
+                VALUES (?,?,?)
             """,
-            (username, password)
+            (username,password,"user")
         )
 
         conn.commit()
