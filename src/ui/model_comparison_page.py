@@ -10,9 +10,6 @@ def show_model_comparison():
         "Compare the performance of different Machine Learning models used for Student Performance Prediction."
     )
 
-    # ==========================================
-    # MODEL RESULTS
-    # ==========================================
 
     results = pd.DataFrame(
         {
@@ -54,10 +51,6 @@ def show_model_comparison():
 
     st.markdown("---")
 
-    # ==========================================
-    # BAR CHART
-    # ==========================================
-
     st.subheader("📈 Accuracy Comparison")
 
     fig = px.bar(
@@ -90,10 +83,6 @@ def show_model_comparison():
 
     st.markdown("---")
 
-    # ==========================================
-    # MODEL RANKING
-    # ==========================================
-
     st.subheader("🥇 Model Ranking")
 
     ranking = results.sort_values(
@@ -107,39 +96,6 @@ def show_model_comparison():
 
     st.markdown("---")
 
-    # ==========================================
-    # PERFORMANCE INSIGHTS
-    # ==========================================
-
-    st.subheader("💡 Performance Insights")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-
-        st.info(
-            """
-            ✅ Random Forest achieved the highest R² score.
-
-            ✅ Excellent at capturing complex relationships.
-
-            ✅ Reduces overfitting using multiple trees.
-            """
-        )
-
-    with col2:
-
-        st.info(
-            """
-            📌 Gradient Boosting also performed strongly.
-
-            📌 Linear Regression produced stable results.
-
-            📌 Decision Tree showed comparatively lower accuracy.
-            """
-        )
-
-    st.markdown("---")
 
     # ==========================================
     # FINAL CONCLUSION

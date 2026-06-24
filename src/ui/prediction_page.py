@@ -74,7 +74,6 @@ def show_prediction_page():
                 "test preparation course": prep
             }
         )
-        st.write(result)
 
         # Save Prediction History
         save_prediction(
