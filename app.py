@@ -1,6 +1,5 @@
 import streamlit as st
 
-# ALL IMPORTS HERE
 from src.ui.home import show_home
 from src.ui.prediction_page import show_prediction_page
 from src.ui.dashboard_page import show_dashboard_page
@@ -14,21 +13,12 @@ from src.auth.login import login_user
 
 
 
-
-# ==========================================
-# PAGE CONFIG
-# ==========================================
-
 st.set_page_config(
     page_title="Student Performance Prediction System",
     page_icon="🎓",
     layout="wide"
 )
 
-
-# ==========================================
-# LOAD CSS
-# ==========================================
 
 def load_css():
     try:
@@ -43,17 +33,10 @@ def load_css():
 
 load_css()
 
-
-# ==========================================
 # DATABASE
-# ==========================================
 
 create_users_table()
 
-
-# ==========================================
-# SESSION STATE
-# ==========================================
 
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
@@ -67,13 +50,6 @@ if "auth_page" not in st.session_state:
     st.session_state.auth_page = "Login"
 
 
-# ==========================================
-# LOGIN / REGISTER PAGE
-# ==========================================
-
-# ==================================================
-# AUTHENTICATION PAGES
-# ==================================================
 
 if not st.session_state.logged_in:
 
@@ -225,9 +201,9 @@ if not st.session_state.logged_in:
                 st.rerun()
 
     st.stop()
-# ==========================================
+
 # SIDEBAR
-# ==========================================
+
 
 st.sidebar.success(
     f"👤 Logged in as: {st.session_state.username}"
@@ -266,10 +242,6 @@ page = st.sidebar.radio(
     menu
 )
 
-
-# ==========================================
-# PAGE ROUTING
-# ==========================================
 
 if page == "🏠 Home":
 
